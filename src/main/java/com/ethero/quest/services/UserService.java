@@ -3,8 +3,10 @@ package com.ethero.quest.services;
 import com.ethero.quest.database.DBManager;
 import com.ethero.quest.exception.DataNotFoundException;
 import com.ethero.quest.models.User;
+import com.ethero.quest.resources.UserResource;
 
 import javax.persistence.TypedQuery;
+import javax.ws.rs.core.UriInfo;
 import java.util.List;
 
 public class UserService {
@@ -96,6 +98,14 @@ public class UserService {
         }
 
         return users;
+    }
+
+    public String getUriSelf(UriInfo uriInfo, User user) {
+        return uriInfo.getBaseUriBuilder()
+                .path(UserResource.class)
+                .path(Long.toString(user.getId()))
+                .build()
+                .toString();
     }
 
 }

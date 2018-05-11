@@ -5,7 +5,9 @@ import com.ethero.quest.resources.Beans.UserFilter;
 import com.ethero.quest.services.UserService;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.UriInfo;
 import java.util.List;
 
 @Path("/users")
@@ -18,28 +20,37 @@ public class UserResource {
     @GET
     public List<User> getUsers(@BeanParam UserFilter userFilter){
 
+        List<User> users = userService.getUsers();
+
         if (userFilter.getAge() > 0){
-            return userService.getUsersByAge(userFilter.getAge());
+            users = userService.getUsersByAge(userFilter.getAge());
         }
 
         if (userFilter.getName() != null){
-            return userService.getUsersByName(userFilter.getName());
+            users = userService.getUsersByName(userFilter.getName());
         }
 
         if (userFilter.getGender() != null){
-            return userService.getUsersByGender(userFilter.getGender());
+            users = userService.getUsersByGender(userFilter.getGender());
         }
 
+        for (User user : users) {
+            user.addLink(userService.getUriSelf(userFilter.getUriInfo(), user), "self");
+        }
 
-
-
-        return userService.getUsers();
+        return users;
     }
 
     @GET
     @Path("/{id}")
-    public User getUser(@PathParam("id") long id){
-        return userService.getUser(id);
+    public User getUser(@PathParam("id") long id, @Context UriInfo uriInfo){
+        User user = userService.getUser(id);
+
+        String uri = userService.getUriSelf(uriInfo, user);
+
+        user.addLink(uri, "self");
+
+        return user;
     }
 
     @POST

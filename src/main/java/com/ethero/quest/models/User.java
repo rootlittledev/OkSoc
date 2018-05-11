@@ -2,6 +2,8 @@ package com.ethero.quest.models;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.ArrayList;
+import java.util.List;
 
 @XmlRootElement
 @Entity
@@ -18,6 +20,8 @@ public class User {
     private String username;
     private String email;
     private String gender;
+
+    @Transient private List<Link> links = new ArrayList<>();
 
     public User() {
     }
@@ -98,5 +102,22 @@ public class User {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public void setLinks(List<Link> links) {
+        this.links = links;
+    }
+
+    public List<Link> getLinks() {
+        return links;
+    }
+
+    public void addLink(String url, String rel){
+        Link link = new Link();
+
+        link.setLink(url);
+        link.setRel(rel);
+
+        links.add(link);
     }
 }
