@@ -1,10 +1,13 @@
 package com.ethero.quest.database;
 
+import com.ethero.quest.models.Interests;
 import com.ethero.quest.models.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DBManager {
 
@@ -16,9 +19,20 @@ public class DBManager {
 
         manager.getTransaction().begin();
 
-        /*manager.persist(new User(20, "Volodymyr", "Mokrytskyi", "ethero", "qweqwe", "male"));
-        manager.persist(new User(20, "Oleg", "Hutsulyak", "sawe", "waaaaww", "male"));
-        manager.persist(new User(20, "Vasya", "Ukrainets", "vaso", "qweqwe", "male"));*/
+      /*List<String> interests = new ArrayList<>();
+        List<String> subInterests = new ArrayList<>();
+
+        interests.add("Programming");
+        interests.add("Music");
+
+        subInterests.add("hiking");
+        subInterests.add("biking");
+
+        Interests interest = new Interests(interests, subInterests);
+
+        manager.persist(new User(20, "Oleg", "Hutsulyak", "sawe", "waaaaww", "male", interest));
+
+        manager.getTransaction().commit();*/
         /*manager.close();
         factory.close();*/
 

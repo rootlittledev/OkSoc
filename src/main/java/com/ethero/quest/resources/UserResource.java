@@ -67,4 +67,10 @@ public class UserResource {
         return user;
     }
 
+    @GET
+    @Path("/{id}/interests")
+    public InterestsResource getInterests(){
+        return new InterestsResource();
+    }
+
 }

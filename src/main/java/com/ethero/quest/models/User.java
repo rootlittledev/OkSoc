@@ -21,18 +21,23 @@ public class User {
     private String email;
     private String gender;
 
-    @Transient private List<Link> links = new ArrayList<>();
+    @OneToOne(cascade = CascadeType.ALL)
+    private Interests interests = new Interests();
+
+    @OneToMany
+    private List<Link> links = new ArrayList<>();
 
     public User() {
     }
 
-    public User(int age, String name, String surname, String username, String email, String gender) {
+    public User(int age, String name, String surname, String username, String email, String gender, Interests interests) {
         this.age = age;
         this.name = name;
         this.surname = surname;
         this.username = username;
         this.email = email;
         this.gender = gender;
+        this.interests = interests;
     }
 
     @Override
@@ -102,6 +107,14 @@ public class User {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public Interests getInterests() {
+        return interests;
+    }
+
+    public void setInterests(Interests interests) {
+        this.interests = interests;
     }
 
     public void setLinks(List<Link> links) {

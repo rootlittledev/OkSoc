@@ -5,10 +5,12 @@
     <persistence-unit name="DBConfig">
 
         <class>com.ethero.quest.models.User</class>
+        <class>com.ethero.quest.models.Link</class>
+
 
         <properties>
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
-            <property name="hibernate.connection.url" value="jdbc:mysql://localhost/EmployeeDB?createDatabaseIfNotExist=true" />
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost/OkSoc?createDatabaseIfNotExist=true" />
             <property name="hibernate.connection.username" value="root" />
             <property name="hibernate.connection.password" value="root" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
